@@ -1,0 +1,20 @@
+<div id="container" data-controller="home">
+<div style="margin-left:4.5em;position:absolute; z-index:999">
+<h1>หาบ้านเหรอ? ปรึกษาเราสิครับ!</h1>
+</div>
+    <div id="mapid"></div>
+    <div id="home-listing">
+        <h1>Places listing</h1>
+
+        <%= turbo_stream_from :homes %>
+
+        <%= turbo_frame_tag :homes do %>
+            <% @homes.each do |home| %>
+                <%= render "home_details", home: home %>
+            <% end %>
+        <% end %>
+
+        <p><%= link_to 'New Home', new_home_path%></p>
+    </div>
+</div>
+<%= javascript_pack_tag 'leaflet_map' %>

@@ -1,0 +1,8 @@
+<div id="home-<%=home.id%>" 
+    data-action="mouseover->home#addMarker click->home#selectHome" 
+    data-home-id="<%=home.id%>"
+    data-home-latitude=<%=home.latitude%>
+    data-home-longitude=<%=home.longitude%>>
+
+    <p><%= home.name %><br/><%=home.latitude%>/<%=home.longitude%></p>
+</div>
