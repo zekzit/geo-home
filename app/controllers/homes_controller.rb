@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-  before_action :set_home, only: [:show, :edit, :update, :destroy]
+  before_action :set_home, only: [:show, :edit, :update, :destroy, :unpin]
 
   # GET /homes
   # GET /homes.json
@@ -16,6 +16,9 @@ class HomesController < ApplicationController
   # GET /homes/new
   def new
     @home = Home.new
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(:new_home, partial: 'homes/turbo_form', locals: { home: @home }) }
+    end
   end
 
   # GET /homes/1/edit
@@ -55,11 +58,16 @@ class HomesController < ApplicationController
   # DELETE /homes/1
   # DELETE /homes/1.json
   def destroy
-    @home.destroy
+    @home.destroy!
     respond_to do |format|
-      format.html { redirect_to homes_url, notice: 'Home was successfully destroyed.' }
+      # format.html { redirect_to homes_url, notice: 'Home was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  # DELETE /homes/1/unpin
+  def unpin
+    @home.destroy!
   end
 
   private

@@ -1,4 +1,4 @@
-<div id="container" data-controller="home">
+<div id="container" data-controller="home" data-action="turbo:submit-end->home#render turbo:before-render->home#render">
 <div style="margin-left:4.5em;position:absolute; z-index:999">
 <h1>หาบ้านเหรอ? ปรึกษาเราสิครับ!</h1>
 </div>
@@ -14,7 +14,8 @@
             <% end %>
         <% end %>
 
-        <p><%= link_to 'New Home', new_home_path%></p>
+        <%= turbo_frame_tag :new_home do %>
+            <p><%= link_to 'New Home', new_home_path %></p>
+        <% end %>
     </div>
 </div>
-<%= javascript_pack_tag 'leaflet_map' %>
